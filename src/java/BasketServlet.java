@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author PC
  */
 @WebServlet(urlPatterns = {"/NewServlet"})
-public class NewServlet extends HttpServlet {
+public class BasketServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
