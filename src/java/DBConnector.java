@@ -7,7 +7,7 @@ public class DBConnector {
     private Connection conn = null;
     private static final String IP = "localhost";
     private static final int PORT = 3306;
-    public static final String DATABASE = "databaseassignment";
+    public static final String DATABASE = "online_shop";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
 
