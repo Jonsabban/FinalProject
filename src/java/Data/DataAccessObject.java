@@ -1,3 +1,5 @@
+package Data;
+
 
 import Logic.Product;
 import java.sql.PreparedStatement;
@@ -12,36 +14,49 @@ import java.util.logging.Logger;
 public class DataAccessObject {
 
     private final DBConnector conn;
+    ArrayList<Product> products = new ArrayList<Product>();
 
     public DataAccessObject() throws Exception {
         this.conn = new DBConnector();
     }
     
-    public ArrayList<Product> getProducts() {
-
+        public Product addProduct(String productName) {
+        
         Product product = null;
-        ArrayList<Product> products = null;
         try {
-            
             Statement stmt = conn.getConnection().createStatement();
-            String sql = "SELECT * FROM online_shop.elektronik";
-            products = new ArrayList<Product>();
+            String sql = "SELECT * FROM elektronik where Pname = "  + "'" + productName + "'";
             ResultSet rs = stmt.executeQuery(sql);
-           
-            while (rs.next()) {
+            if (rs.next()) {
                 String name = rs.getString("Pname");
                 int price = rs.getInt("Pprice");
                 product = new Product(name, price);
-                products.add(product);
-
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        products.add(product);
+
+        return product;
+    }
+         
+    
+    public ArrayList<Product> getMoreProducts() {
 
         return products;
     }
     
-    
+ public void removeProduct(String productName) {
+
+        for (Product product : products) {
+            if (product.getName() != null && product.getName().contains(productName)) {
+                products.remove(product);
+            }
+
+        }
+
+    }
+
     
 }
