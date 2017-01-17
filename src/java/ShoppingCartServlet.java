@@ -1,38 +1,52 @@
+
+import Data.DataAccessObject;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/Basket"})
-public class ShoppingCartServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+@WebServlet(urlPatterns = {"/Cart"})
+public class ShoppingCartServlet extends HttpServlet {
+    
+    DataAccessObject dao = new DataAccessObject();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Did it work?!?</title>");            
+            out.println("<title>Did it work?!?</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1> I belive it did! " + request.getContextPath() + "</h1>");
+            out.println("<h1> I belive it did! " + "</h1>");
+            
+            if ( request.getParameter("iMac") != null) {
+                dao.addProduct("iMac");
+            }
+            if ( request.getParameter("iPadPro") != null) {
+                dao.addProduct("iPad Pro");
+            }
+            if ( request.getParameter("AppleWatch") != null) {
+                dao.addProduct("Apple Watch");
+            }
+            
+            int total = dao.getTotal();
+            
+            out.println("<h2>" + " Total is: " + total + "</h2>" );
+            
             out.println("</body>");
             out.println("</html>");
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -75,3 +89,4 @@ public class ShoppingCartServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+

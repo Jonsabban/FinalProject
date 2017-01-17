@@ -89,7 +89,7 @@ public class DataAccesObjectTest {
         dao.addProduct("Apple Watch");
         dao.addProduct("iMac");
         dao.addProduct("MacBook Pro");
-        Collection<Product> allProducts = dao.getMoreProducts();
+        Collection<Product> allProducts = dao.getAllProducts();
         Iterator<Product> it = allProducts.iterator();
         assertTrue(it.hasNext());
         Product a = it.next();
@@ -114,13 +114,55 @@ public class DataAccesObjectTest {
         dao.addProduct("Apple Watch");
         dao.addProduct("iMac");
         dao.addProduct("MacBook Pro");
-        Collection<Product> allProducts = dao.getMoreProducts();
+        Collection<Product> allProducts = dao.getAllProducts();
         assertEquals(allProducts.size(), 3);
-        
+
         dao.removeProduct("iMac");
         assertEquals(allProducts.size(), 2);
-        
 
     }
 
+    @Test
+    public void testGetTotal() {
+        dao.addProduct("Apple Watch");
+        dao.addProduct("iMac");
+        dao.addProduct("MacBook Pro");
+        Collection<Product> allProducts = dao.getAllProducts();
+        assertEquals(allProducts.size(), 3);
+
+        int total = dao.getTotal();
+
+        assertEquals(total, 25400);
+
+    }
+
+    @Test
+    public void testSortProductsByName() {
+        dao.addProduct("iMac");
+        dao.addProduct("MacBook Pro");
+        dao.addProduct("Apple Watch");
+        Collection<Product> allProducts = dao.getAllProducts();
+        assertEquals(allProducts.size(), 3);
+        
+        dao.sortProductsByName();
+        
+        
+        
+        Iterator<Product> it = allProducts.iterator();
+        assertTrue(it.hasNext());
+        Product a = it.next();
+        assertTrue(it.hasNext());
+        Product b = it.next();
+        assertTrue(it.hasNext());
+        Product c = it.next();
+        
+        System.out.println(allProducts);
+        System.out.println(a.getName());
+        System.out.println(b.getName());
+        System.out.println(c.getName());
+        
+        assertEquals("Apple Watch", a.getName());
+        assertEquals("iMac", b.getName());
+        assertEquals("MacBook Pro", c.getName());
+    }
 }
