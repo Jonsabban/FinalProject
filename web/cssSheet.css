@@ -19,6 +19,12 @@ text-align: center;
 
 }
 
+h3{
+font-size: 40;
+color: yellow;
+text-align: left;
+
+}
 
 
 ul {
@@ -27,6 +33,15 @@ ul {
     padding: 0;
     overflow: hidden;
     background-color: black;
+    text-align: right;
+}
+
+div.box {
+    background-color: lightgrey;
+    width: 300px;
+    border: 25px solid green;
+    padding: 25px;
+    margin: 25px;
 }
 
 li {
@@ -45,15 +60,12 @@ li a:hover {
     background-color: blue;
 }
 
-
-
-div.img:hover {
-    border: 1px solid #777;
-}
-
 div.img img {
     width: 500px;
-    height: 500px;
+    height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
 }
 
 div.desc {
@@ -62,8 +74,12 @@ div.desc {
     text-align: center;
 }
 
-
-
+.button {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    background-color: #f44336;
+}
 
 footer {
 
