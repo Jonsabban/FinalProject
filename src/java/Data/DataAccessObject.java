@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class DataAccessObject {
 
     private final DBConnector conn;
-    ArrayList<Product> products = new ArrayList<Product>();
+    ArrayList<Product> products = new ArrayList<>();
 
     public DataAccessObject() {
         this.conn = new DBConnector();
@@ -59,6 +59,24 @@ public class DataAccessObject {
 
     }
 
+    public Product getProduct(String productName) {
+        Product product = null;
+        try {
+            Statement stmt = conn.getConnection().createStatement();
+            String sql = "SELECT * FROM elektronik where Pname = " + "'" + productName + "'";
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                String name = rs.getString("Pname");
+                int price = rs.getInt("Pprice");
+                product = new Product(name, price);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return product;
+    }
+
     public int getTotal() {
         int total = 0;
 
@@ -85,9 +103,12 @@ public class DataAccessObject {
             }
             );
 
-            
         }
         return products;
     }
+
+    public void emptyArrayList() {
+
+        products.clear();
+    }
 }
-    
