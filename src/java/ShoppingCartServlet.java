@@ -23,7 +23,7 @@ public class ShoppingCartServlet extends HttpServlet {
 
             dao.emptyArrayList();
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("HolyShitLetsTryThis.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ShoppingCart.jsp");
             String output = "";
 
             System.out.println("before trycatch");

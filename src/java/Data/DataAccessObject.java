@@ -73,7 +73,7 @@ public class DataAccessObject {
         } catch (SQLException ex) {
             Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return product;
     }
 
@@ -111,5 +111,5 @@ public class DataAccessObject {
 
         products.clear();
     }
-    
+
 }
