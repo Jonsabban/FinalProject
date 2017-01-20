@@ -21,18 +21,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <ul>
-            <li><a class="active" href="Frontpage.html">Forside</a></li>
-            <li><a class="active" href="Offers.html">Ugens tilbud</a></li>
-            <li><a class="active" href="Catalog.html">Katalog</a></li>
-            <li><a class="active" href="Contact.html">Kontakt os</a></li>
-            <li><a class="active" href="AboutGooB.html">Om GooB</a></li>
-            <div>
-                <a target="_blank" href="Basket.html">
-                    <img src="Basket.png" alt="Cart" height="45px" width="45px">
-                </a>
-            </div>
-        </ul> 
+  <ul>
+  <li><a class="active" href="Frontpage.html">Forside</a></li>
+  <li><a class="active" href="Offers.html">Ugens tilbud</a></li>
+  <li class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">Katalog</a>
+      <div class="dropdown-content"> 
+          <a href="Apple.html">Apple</a>
+          <a href="Samsung.html">Samsung</a>
+          <a href="Sony.html">Sony</a>
+      </div>
+      </li>
+  <li><a class="active" href="Contact.html">Kontakt os</a></li>
+  <li><a class="active" href="AboutGooB.html">Om GooB</a></li>
+    <div>
+  <a target="_blank" href="Basket.html">
+    <img src="Basket.png" alt="Cart" height="45px" width="45px">
+  </a>
+</div>
+</ul>
         
         <div class="box"> <%=request.getAttribute("ServletOutput")%> </div>
     </body>
