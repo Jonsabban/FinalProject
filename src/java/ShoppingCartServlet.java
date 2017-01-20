@@ -91,6 +91,8 @@ public class ShoppingCartServlet extends HttpServlet {
                 response.sendRedirect("Frontpage.html");
             }
 
+            out.println("</body>");
+            out.println("</html>");
         }
 
     }
