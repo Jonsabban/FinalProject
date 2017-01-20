@@ -1,7 +1,6 @@
 package Data;
 
 import Logic.Product;
-import Logic.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -99,7 +98,7 @@ public class DataAccessObject {
             Collections.sort(products, new Comparator<Product>() {
                 @Override
                 public int compare(Product t, Product t1) {
-                    return t.getName().compareTo(t1.getName());
+                    return t.getName().compareToIgnoreCase(t1.getName());
                 }
             }
             );
@@ -113,19 +112,4 @@ public class DataAccessObject {
         products.clear();
     }
     
-    
-    public User addUser(String username, String password) {
-        
-        User user = null;
-        try {
-            Statement stmt = conn.getConnection().createStatement();
-            String sql = "insert into elektronik (Pname, Pprice) values ('" + username + "'," + password + "'";
-            ResultSet rs = stmt.executeQuery(sql);
-            }
-        catch (SQLException ex) {
-            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return user;
-    }
 }
