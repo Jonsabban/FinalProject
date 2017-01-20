@@ -1,6 +1,7 @@
 package Data;
 
 import Logic.Product;
+import Logic.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -110,5 +111,21 @@ public class DataAccessObject {
     public void emptyArrayList() {
 
         products.clear();
+    }
+    
+    
+    public User addUser(String username, String password) {
+        
+        User user = null;
+        try {
+            Statement stmt = conn.getConnection().createStatement();
+            String sql = "insert into elektronik (Pname, Pprice) values ('" + username + "'," + password + "'";
+            ResultSet rs = stmt.executeQuery(sql);
+            }
+        catch (SQLException ex) {
+            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return user;
     }
 }
