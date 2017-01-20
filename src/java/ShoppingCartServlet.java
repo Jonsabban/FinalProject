@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,27 +23,17 @@ public class ShoppingCartServlet extends HttpServlet {
 
             dao.emptyArrayList();
 
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Did it work?!?</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1> I belive it did! " + "</h1>");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("HolyShitLetsTryThis.jsp");
+            String output = "";
+
+            System.out.println("before trycatch");
 
             try {
 
-                if (!(request.getParameter("iMac")).equals("")) {
-
-                    if (Integer.parseInt(request.getParameter("iMac")) == 1) {
-                        dao.addProduct("iMac");
-                    } else if (Integer.parseInt(request.getParameter("iMac")) > 1) {
-                        for (int i = 0; i < Integer.parseInt(request.getParameter("iMac")); i++) {
-                            dao.addProduct("iMac");
-                        }
-                    }
-                }
+                System.out.println("1*");
+                System.out.println(request.getParameter("iPadPro"));
                 if (!(request.getParameter("iPadPro").equals(""))) {
+                    System.out.println("1");
                     if (Integer.parseInt(request.getParameter("iPadPro")) >= 1) {
                         for (int i = 0; i < Integer.parseInt(request.getParameter("iPadPro")); i++) {
                             dao.addProduct("iPad Pro");
@@ -50,38 +41,54 @@ public class ShoppingCartServlet extends HttpServlet {
                     }
                 }
 
-                if (!(request.getParameter("AppleWatch").equals(""))) {
-
-                    if (Integer.parseInt(request.getParameter("AppleWatch")) >= 1) {
-                        for (int i = 0; i < Integer.parseInt(request.getParameter("AppleWatch")); i++) {
-                            dao.addProduct("Apple Watch");
+                if (!(request.getParameter("iPhone")).equals("")) {
+                    System.out.println("2");
+                    if (Integer.parseInt(request.getParameter("iPhone")) == 1) {
+                        dao.addProduct("iPhone 7");
+                    } else if (Integer.parseInt(request.getParameter("iPhone")) > 1) {
+                        for (int i = 0; i < Integer.parseInt(request.getParameter("iPhone")); i++) {
+                            dao.addProduct("iPhone 7");
+                        }
+                    }
+                }
+                if (!(request.getParameter("MacBookPro")).equals("")) {
+                    System.out.println("3");
+                    if (Integer.parseInt(request.getParameter("MacBookPro")) == 1) {
+                        dao.addProduct("MacBook Pro");
+                    } else if (Integer.parseInt(request.getParameter("MacBookPro")) > 1) {
+                        for (int i = 0; i < Integer.parseInt(request.getParameter("MacBookPro")); i++) {
+                            dao.addProduct("MacBook Pro");
                         }
                     }
                 }
 
-                int total = 0;
-                total = dao.getTotal();
-
-                if (request.getParameter("iMac") != "") {
-                    if (Integer.parseInt(request.getParameter("iMac")) > 0) {
-                        out.println("<h2>" + " iMac............... " + request.getParameter("iMac") + "x " + dao.getProduct("iMac").getPrice() + " </h2>");
-                    }
-                }
-                if (request.getParameter("AppleWatch") != "") {
-                    if (Integer.parseInt(request.getParameter("AppleWatch")) > 0) {
-                        out.println("<h3>" + " Apple Watch............... " + request.getParameter("AppleWatch") + "x " + dao.getProduct("Apple Watch").getPrice() + " </h3>");
-                    }
-                }
                 if (request.getParameter("iPadPro") != "") {
                     if (Integer.parseInt(request.getParameter("iPadPro")) > 0) {
-                        out.println("<h4>" + " iPad Pro............... " + request.getParameter("iPadPro") + "x " + dao.getProduct("iPad Pro").getPrice() + " </h4>");
+                        output += (dao.getProduct("iPad Pro").getName() + "............... " + request.getParameter("iPadPro") + "x " + dao.getProduct("iPad Pro").getPrice() +"DKK " + "<br/>");
                     }
                 }
+                if (request.getParameter("iPhone") != "") {
+                    if (Integer.parseInt(request.getParameter("iPhone")) > 0) {
+                        output += (dao.getProduct("iPhone 7").getName() + "............... " + request.getParameter("iPhone") + "x " + dao.getProduct("iPhone 7").getPrice() +"DKK" + "<br/>");
+                    }
+                }
+                if (request.getParameter("MacBookPro") != "") {
+                    if (Integer.parseInt(request.getParameter("MacBookPro")) > 0) {
+                        output += (dao.getProduct("MacBook Pro").getName() + "............... " + request.getParameter("MacBookPro") + "x " + dao.getProduct("MacBook Pro").getPrice() +"DKK" + "<br/>");
+                    }
+                }
+                
+                int total = dao.getTotal();
+                
+                output += ("<br/>" + "<br/>" + "Your total is: " + total + "DKK" );
 
-                out.println("<h5>" + " Total is: " + total + "</h5>");
+                
+                request.setAttribute("ServletOutput", output);
+                dispatcher.forward(request, response);
 
             } catch (NumberFormatException e) {
-                response.sendRedirect("TestPage.html");
+                System.out.println("Error");
+                response.sendRedirect("Frontpage.html");
             }
 
             out.println("</body>");
