@@ -14,9 +14,6 @@
         <title> GooB </title>
         <link rel="stylesheet" type="text/css" href="cssSheet.css">
         <link rel="stylesheet" href="cssSheet.css" type="text/css"/>
-        <link rel="stylesheet" href="cssSheet.css" type="text/css">
-        <link rel="stylesheet" href="cssSheet.css" type="text/css"/>
-        <link rel="stylesheet" href="cssSheet.css" type="text/css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -34,11 +31,6 @@
       </li>
   <li><a class="active" href="Contact.html">Kontakt os</a></li>
   <li><a class="active" href="AboutGooB.html">Om GooB</a></li>
-    <div>
-  <a target="_blank" href="Basket.html">
-    <img src="Basket.png" alt="Cart" height="45px" width="45px">
-  </a>
-</div>
 </ul>
         
         <div class="box"> <%=request.getAttribute("ServletOutput")%> </div>
